@@ -1,29 +1,23 @@
 package bettersoftware.birdwatching;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
+
+import bettersoftware.birdwatching.placing.IPlacingStrategy;
 
 
 public class GameField {
 	
-	public enum PlacingMode {
-	    Custom, Random 
-	}
+	private List<Bird> birds;
+	private int length;
+	private int width; 
+	private int height;
 	
-	List<Bird> birds;
-	int width;
-	int height; 
-	int depth;
-	boolean gameStarted;
-	private FieldSize fieldSize;
-	
-
-	public GameField(int width, int height, int depth, FieldSize fieldSize) {
-		this.width = width;
-		this.height = height;
-		this.depth = depth;
-		this.fieldSize = fieldSize;
+	public GameField(int width, int height, int depth) {
+		this.length = width;
+		this.width = height;
+		this.height = depth;
 		birds = new ArrayList<Bird>();
 	}
 	
@@ -31,71 +25,30 @@ public class GameField {
 		birds.add(b);
 	}
 	
-	
-	//Start the game
-	public boolean startGame(PlacingMode pm) {
-		try {
-			placeBirds(pm);
-			gameStarted = (birds.size() > 0 && isHuntingFieldValid());
-		} catch (Exception e) {
-			gameStarted = false;
-		}
-		return gameStarted;
+	public Iterator<Bird> getBirds() {
+		return birds.iterator();
 	}
 	
-	//Shot to a bird
-	public boolean shot(int x, int y, int h) {
-		boolean hit = false;
-		if (gameStarted)
-		{
-			for(Bird bird : birds) {
-				int height = bird.getHeight();
-				Location location = bird.getLocation();
-				hit =  location.x == x && location.y == y && height == h;
-				if (hit)
-				{
-					bird.sing();
-					break;
-				}
-			}
-		}
-         return hit;   
-	}
 	
 	//Place the birds on the fields
-	private void placeBirds(PlacingMode type) throws Exception {
-			
-		//Random Distribution
-		if (type == PlacingMode.Random) {
-			for(Bird bird : birds) {
-				Location location = new Location(new Random().nextInt(this.width), new Random().nextInt(this.height));
-				bird.setLocation(location);
-				if (!(bird instanceof Chicken))
-					bird.setHeight(new Random().nextInt(this.depth));
-			}
-		} 
-		//Custom Distribution
-		else if (type == PlacingMode.Custom) {
-			
-		}
+	public void placeBirds(IPlacingStrategy strategy)  {
+		strategy.place(birds, length, width, height);
 	}
 	
 	//Check if the HuntingField is Valid
-	private boolean isHuntingFieldValid()
+	public boolean isHuntingFieldValid()
 	{
-		boolean isValid = true;
+		boolean isValid = false;
 		for(Bird bird : birds) {
-			int h = bird.getHeight();
+			int h = 0;
+			if (bird instanceof FlyingBird)
+				h = ((FlyingBird)bird).getHeight();
 			Location location = bird.getLocation();
-			int x = location.x;
-			int y = location.y;
-			isValid =  fieldSize.isWithinField(h, x, y);
+			isValid =  h >= 0 && h <= this.height && location.isWithinArea(length, width);;
 			if (!isValid)
 				break;
 		}
 		return isValid;
-		
 	}
 	
-
 }
