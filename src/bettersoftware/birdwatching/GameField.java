@@ -14,10 +14,10 @@ public class GameField {
 	private int width; 
 	private int height;
 	
-	public GameField(int width, int height, int depth) {
-		this.length = width;
-		this.width = height;
-		this.height = depth;
+	public GameField(int length, int width, int height) {
+		this.length = length;
+		this.width = width;
+		this.height = height;
 		birds = new ArrayList<Bird>();
 	}
 	
@@ -44,7 +44,7 @@ public class GameField {
 			if (bird instanceof FlyingBird)
 				h = ((FlyingBird)bird).getHeight();
 			Location location = bird.getLocation();
-			isValid =  h >= 0 && h <= this.height && location.isWithinArea(length, width);;
+			isValid =  h >= 0 && h <= this.height && location.isWithinArea(length, width);
 			if (!isValid)
 				break;
 		}
