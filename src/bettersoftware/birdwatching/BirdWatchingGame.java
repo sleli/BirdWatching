@@ -17,7 +17,7 @@ public class BirdWatchingGame {
 	//Start the game
 	public boolean startGame(IPlacingStrategy strategy) {
 		field.placeBirds(strategy);
-		gameStarted = field.isHuntingFieldValid();
+		gameStarted = field.isGameFieldValid();
 		return gameStarted;
 	}
 	

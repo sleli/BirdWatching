@@ -35,8 +35,8 @@ public class GameField {
 		strategy.place(birds, length, width, height);
 	}
 	
-	//Check if the HuntingField is Valid
-	public boolean isHuntingFieldValid()
+	//Check if the GameField is Valid
+	public boolean isGameFieldValid()
 	{
 		boolean isValid = false;
 		for(Bird bird : birds) {
