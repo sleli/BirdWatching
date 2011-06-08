@@ -36,7 +36,7 @@ public class GameField {
 	public boolean startGame(PlacingMode pm) {
 		try {
 			placeBirds(pm);
-			gameStarted = (birds.size() > 0 && isHuntingFieldValid());
+			gameStarted = (birds.size() > 0 && isGameFieldValid());
 		} catch (Exception e) {
 			gameStarted = false;
 		}
@@ -80,8 +80,8 @@ public class GameField {
 		}
 	}
 	
-	//Check if the HuntingField is Valid
-	private boolean isHuntingFieldValid()
+	//Check if the GameField is Valid
+	private boolean isGameFieldValid()
 	{
 		boolean isValid = true;
 		for(Bird bird : birds) {
