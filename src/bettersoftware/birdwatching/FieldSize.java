@@ -24,7 +24,7 @@ public class FieldSize {
 		return depth;
 	}
 
-	public boolean isWithinField(int h, int x, int y) {
-		return h >= 0 && h <= depth && (x >= 0 && x <= width && y >= 0 && y <= height);
+	public boolean isWithinField(Location location) {
+		return location.h >= 0 && location.h <= depth && (location.x >= 0 && location.x <= width && location.y >= 0 && location.y <= height);
 	}
 }

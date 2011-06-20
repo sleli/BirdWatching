@@ -3,15 +3,7 @@ package bettersoftware.birdwatching;
 public abstract class Bird {
 	Location location;
 	int height;
-	
-	public void setHeight(int height) throws Exception{
-		this.height = height;	
-	}
-	
-	public int getHeight() {
-		return height;
-	}
-	
+		
 	public void setLocation(Location location) {
 		this.location = location;
 		
@@ -22,4 +14,13 @@ public abstract class Bird {
 	}
 	
 	public abstract void sing();
+
+	public boolean wasHit(Location shotLocation) {
+		if (shotLocation.equals(getLocation()))
+		{
+			sing();
+			return true;
+		}
+		return false;
+	}
 }

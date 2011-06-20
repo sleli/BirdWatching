@@ -1,5 +1,6 @@
 package bettersoftware.birdwatching;
 
+
 public class Chicken extends Bird {
 
 	public void sing() {
@@ -7,8 +8,9 @@ public class Chicken extends Bird {
 	}
 	
 	@Override
-	public void setHeight(int height) throws Exception {
-		throw new Exception("I can't fly");
+	public void setLocation(Location location) {
+		location.h = 0;
+		super.setLocation(location);
 	}
 
 }

@@ -13,7 +13,7 @@ public class BirdWatchingTest  {
 	
 	@Before
 	public void Setup() {
-        field = new GameField(10,5,3, new FieldSize(10,5,3));
+        field = new GameField(new FieldSize(10,5,3));
 	}
 
 	@Test
@@ -31,8 +31,7 @@ public class BirdWatchingTest  {
         chicken.setLocation(new Location(0,0));
         
         Bird duck = new Duck();
-        duck.setLocation(new Location(10,5));
-        duck.setHeight(3);
+        duck.setLocation(new Location(10,5,3));
         
         field.addBird(chicken);
 		field.addBird(duck);
@@ -46,8 +45,7 @@ public class BirdWatchingTest  {
         chicken.setLocation(new Location(11,0));
         
         Bird duck = new Duck();
-        duck.setLocation(new Location(10,5));
-        duck.setHeight(4);
+        duck.setLocation(new Location(10,5,4));
         
         field.addBird(chicken);
 		field.addBird(duck);
@@ -58,11 +56,10 @@ public class BirdWatchingTest  {
     public void rightShotShouldFailIfGameIsNotStarted() throws Exception
     {                  
         Bird duck = new Duck();
-        duck.setLocation(new Location(10,5));
-        duck.setHeight(3);
+        duck.setLocation(new Location(10,5,3));
         
 		field.addBird(duck);
-		assertFalse(field.shot(10, 5, 3));
+		assertFalse(field.shot(new Location(10, 5, 3)));
     }
 	
 	
@@ -70,23 +67,21 @@ public class BirdWatchingTest  {
     public void rightShotShouldHitABird() throws Exception
     {                  
         Bird duck = new Duck();
-        duck.setLocation(new Location(10,5));
-        duck.setHeight(3);
+        duck.setLocation(new Location(10,5,3));
         
 		field.addBird(duck);
 		field.startGame(GameField.PlacingMode.Custom);
-		assertTrue(field.shot(10, 5, 3));
+		assertTrue(field.shot(new Location(10, 5, 3)));
     }
 	
 	@Test
     public void wrongShotShouldMissABird() throws Exception
     {                  
         Bird duck = new Duck();
-        duck.setLocation(new Location(10,5));
-        duck.setHeight(3);
+        duck.setLocation(new Location(10,5,3));
         
 		field.addBird(duck);
-		assertFalse(field.shot(9, 5, 3));
+		assertFalse(field.shot(new Location(9, 5, 3)));
     }
 	
 }
