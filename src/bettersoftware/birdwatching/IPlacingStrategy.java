@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface IPlacingStrategy {
 
-	void place(List<Bird> birds);
+	void place(Iterable<Bird> birds);
 
 }

@@ -9,8 +9,7 @@ public class Chicken extends Bird {
 	
 	@Override
 	public void setLocation(Location location) {
-		location.h = 0;
-		super.setLocation(location);
+		super.setLocation(location.flatten());
 	}
 
 }

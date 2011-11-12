@@ -1,12 +1,10 @@
 package bettersoftware.birdwatching;
 
-import bettersoftware.birdwatching.GameField.PlacingMode;
-
 public class PlacingStrategyFactory {
 
-	public IPlacingStrategy create(PlacingMode type, FieldSize fieldSize) {
+	public IPlacingStrategy create(PlacingMode type, GridSize gridSize) {
 		if (type == PlacingMode.Random) {
-			return new RandomPlacingStrategy(fieldSize);
+			return new RandomPlacingStrategy(gridSize);
 		} 
 		return new NullPlacingStrategy();
 	}

@@ -5,18 +5,17 @@ import java.util.Random;
 
 public class RandomPlacingStrategy implements IPlacingStrategy {
 
-	private FieldSize fieldSize;
+	private GridSize gridSize;
 
-	public RandomPlacingStrategy(FieldSize fieldSize) {
-		this.fieldSize = fieldSize;
+	public RandomPlacingStrategy(GridSize gridSize) {
+		this.gridSize = gridSize;
 	}
 
-	@Override
-	public void place(List<Bird> birds) {
+	public void place(Iterable<Bird> birds) {
 		for(Bird bird : birds) {
-			Location location = new Location(new Random().nextInt(fieldSize.width()), 
-												new Random().nextInt(fieldSize.height()),
-												new Random().nextInt(fieldSize.depth()));
+			Location location = new Location(new Random().nextInt(gridSize.width()),
+											 new Random().nextInt(gridSize.height()),
+											 new Random().nextInt(gridSize.depth()));
 			bird.setLocation(location);
 		}
 	}

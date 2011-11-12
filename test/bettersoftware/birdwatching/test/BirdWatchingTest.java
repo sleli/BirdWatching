@@ -9,79 +9,69 @@ import static org.junit.Assert.* ;
 public class BirdWatchingTest  {
 	
 	
-	private GameField field;
+	private GridPlanner gridPlanner;
 	
 	@Before
 	public void Setup() {
-        field = new GameField(new FieldSize(10,5,3));
+        gridPlanner = new GridPlanner(new GridSize(10,5,3));
 	}
 
 	@Test
     public void randomPlacingShouldStartGame()
     {                  
-        field.addBird(new Chicken());
-		field.addBird(new Duck());
-		assertTrue(field.startGame(GameField.PlacingMode.Random));
+        gridPlanner.addBird(new Chicken());
+		gridPlanner.addBird(new Duck());
+		assertTrue(gridPlanner.startGame(PlacingMode.Random).isValid());
     }
 	
 	@Test
-    public void customPlacingShouldStartGameWithValidBirdsPlacing() throws Exception
+    public void customPlacingShouldStartGameWithValidBirdsPlacing()
     {                  
         Bird chicken = new Chicken();
         chicken.setLocation(new Location(0,0));
         
         Bird duck = new Duck();
-        duck.setLocation(new Location(10,5,3));
+        duck.setLocation(new Location(10, 5, 3));
         
-        field.addBird(chicken);
-		field.addBird(duck);
-		assertTrue(field.startGame(GameField.PlacingMode.Custom));
+        gridPlanner.addBird(chicken);
+		gridPlanner.addBird(duck);
+		assertTrue(gridPlanner.startGame(PlacingMode.Custom).isValid());
     }
 	
 	@Test
-    public void customPlacingShouldNotStartGameWithInvalidBirdsPlacing() throws Exception
+    public void customPlacingShouldNotStartGameWithInvalidBirdsPlacing()
     {                  
         Bird chicken = new Chicken();
         chicken.setLocation(new Location(11,0));
         
         Bird duck = new Duck();
-        duck.setLocation(new Location(10,5,4));
+        duck.setLocation(new Location(10, 5, 4));
         
-        field.addBird(chicken);
-		field.addBird(duck);
-		assertFalse(field.startGame(GameField.PlacingMode.Custom));
+        gridPlanner.addBird(chicken);
+		gridPlanner.addBird(duck);
+		assertFalse(gridPlanner.startGame(PlacingMode.Custom).isValid());
     }
 	
 	@Test
-    public void rightShotShouldFailIfGameIsNotStarted() throws Exception
+    public void rightShotShouldHitABird()
     {                  
         Bird duck = new Duck();
-        duck.setLocation(new Location(10,5,3));
+        duck.setLocation(new Location(10, 5, 3));
         
-		field.addBird(duck);
-		assertFalse(field.shot(new Location(10, 5, 3)));
-    }
-	
-	
-	@Test
-    public void rightShotShouldHitABird() throws Exception
-    {                  
-        Bird duck = new Duck();
-        duck.setLocation(new Location(10,5,3));
-        
-		field.addBird(duck);
-		field.startGame(GameField.PlacingMode.Custom);
-		assertTrue(field.shot(new Location(10, 5, 3)));
+		gridPlanner.addBird(duck);
+		Grid grid = gridPlanner.startGame(PlacingMode.Custom);
+		assertTrue(grid.shot(new Location(10, 5, 3)));
     }
 	
 	@Test
-    public void wrongShotShouldMissABird() throws Exception
+    public void wrongShotShouldMissABird()
     {                  
         Bird duck = new Duck();
-        duck.setLocation(new Location(10,5,3));
+        duck.setLocation(new Location(10, 5, 3));
         
-		field.addBird(duck);
-		assertFalse(field.shot(new Location(9, 5, 3)));
+		gridPlanner.addBird(duck);
+        Grid grid = gridPlanner.startGame(PlacingMode.Custom);
+		assertFalse(grid.shot(new Location(9, 5, 3)));
     }
 	
 }

@@ -4,8 +4,7 @@ import java.util.List;
 
 public class NullPlacingStrategy implements IPlacingStrategy {
 
-	@Override
-	public void place(List<Bird> birds) {
+	public void place(Iterable<Bird> birds) {
 		// Do nothing
 	}
 
