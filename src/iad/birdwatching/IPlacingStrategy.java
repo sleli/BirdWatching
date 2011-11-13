@@ -1,6 +1,4 @@
-package bettersoftware.birdwatching;
-
-import java.util.List;
+package iad.birdwatching;
 
 public interface IPlacingStrategy {
 

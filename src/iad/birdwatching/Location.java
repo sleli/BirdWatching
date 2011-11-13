@@ -1,4 +1,4 @@
-package bettersoftware.birdwatching;
+package iad.birdwatching;
 
 public class Location {
 	private int x = 0;

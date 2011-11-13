@@ -1,8 +1,8 @@
-package bettersoftware.birdwatching.test;
+package iad.birdwatching.test;
 
 import org.junit.* ; 
 
-import bettersoftware.birdwatching.*;
+import iad.birdwatching.*;
 
 import static org.junit.Assert.* ; 
 

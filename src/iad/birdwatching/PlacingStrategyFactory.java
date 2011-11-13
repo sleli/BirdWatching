@@ -1,4 +1,4 @@
-package bettersoftware.birdwatching;
+package iad.birdwatching;
 
 public class PlacingStrategyFactory {
 

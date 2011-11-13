@@ -1,6 +1,5 @@
-package bettersoftware.birdwatching;
+package iad.birdwatching;
 
-import java.util.List;
 import java.util.Random;
 
 public class RandomPlacingStrategy implements IPlacingStrategy {

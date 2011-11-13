@@ -1,4 +1,4 @@
-package bettersoftware.birdwatching;
+package iad.birdwatching;
 
 import java.util.ArrayList;
 import java.util.Iterator;
