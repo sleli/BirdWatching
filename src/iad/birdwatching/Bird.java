@@ -2,7 +2,6 @@ package iad.birdwatching;
 
 public abstract class Bird {
 	Location location;
-	int height;
 		
 	public void setLocation(Location location) {
 		this.location = location;
