@@ -9,11 +9,11 @@ import static org.junit.Assert.* ;
 public class BirdWatchingTest  {
 	
 	
-	private GridPlanner gridPlanner;
+	private BirdWatchingPlanner gridPlanner;
 	
 	@Before
 	public void Setup() {
-        gridPlanner = new GridPlanner(new GridSize(10,5,3));
+        gridPlanner = new BirdWatchingPlanner(new GridSize(10,5,3));
 	}
 
 	@Test
@@ -21,7 +21,7 @@ public class BirdWatchingTest  {
     {                  
         gridPlanner.addBird(new Chicken());
 		gridPlanner.addBird(new Duck());
-		assertTrue(gridPlanner.startGame(PlacingMode.Random).isValid());
+		assertTrue(gridPlanner.placeOnGrid(PlacingMode.Random).isValid());
     }
 	
 	@Test
@@ -35,7 +35,7 @@ public class BirdWatchingTest  {
         
         gridPlanner.addBird(chicken);
 		gridPlanner.addBird(duck);
-		assertTrue(gridPlanner.startGame(PlacingMode.Custom).isValid());
+		assertTrue(gridPlanner.placeOnGrid(PlacingMode.Custom).isValid());
     }
 	
 	@Test
@@ -49,7 +49,7 @@ public class BirdWatchingTest  {
         
         gridPlanner.addBird(chicken);
 		gridPlanner.addBird(duck);
-		assertFalse(gridPlanner.startGame(PlacingMode.Custom).isValid());
+		assertFalse(gridPlanner.placeOnGrid(PlacingMode.Custom).isValid());
     }
 	
 	@Test
@@ -59,7 +59,7 @@ public class BirdWatchingTest  {
         duck.setLocation(new Location(10, 5, 3));
         
 		gridPlanner.addBird(duck);
-		Grid grid = gridPlanner.startGame(PlacingMode.Custom);
+		Grid grid = gridPlanner.placeOnGrid(PlacingMode.Custom);
 		assertTrue(grid.shot(new Location(10, 5, 3)));
     }
 	
@@ -70,7 +70,7 @@ public class BirdWatchingTest  {
         duck.setLocation(new Location(10, 5, 3));
         
 		gridPlanner.addBird(duck);
-        Grid grid = gridPlanner.startGame(PlacingMode.Custom);
+        Grid grid = gridPlanner.placeOnGrid(PlacingMode.Custom);
 		assertFalse(grid.shot(new Location(9, 5, 3)));
     }
 	
