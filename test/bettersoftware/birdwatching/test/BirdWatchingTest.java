@@ -81,6 +81,7 @@ public class BirdWatchingTest  {
         duck.setLocation(new Location(10,5,3));
         
 		field.addBird(duck);
+		field.startGame(GameField.PlacingMode.Custom);
 		assertFalse(field.shot(new Location(9, 5, 3)));
     }
 	
