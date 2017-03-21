@@ -100,8 +100,9 @@ public class BirdWatchingTest  {
         duck.setHeight(3);
         
 		field.addBird(duck);
-		
+	
 		BirdWatchingGame game = new BirdWatchingGame(field);
+		game.startGame(new CustomPlacingStrategy());
 		assertFalse(game.shot(9, 5, 3));
     }
 	
